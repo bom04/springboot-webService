@@ -29,7 +29,8 @@ repositories { // 각종 의존성(라이브러리)들을 어떤 '원격 저장�
     jcenter() // 개인이 만든 라이브러리를 간단하게 업로드 할 수 있게 해줌, 뿐만 아니라 jcenter에 업로드 해놓으면 mavenCentral에서도 자동으로 업로드가 되게 함
 }
 
-dependencies { // 프로젝트에 필요한 의존성을 선언하는 곳 (버전 설정 안하면 맨 위의 buildscript>dependencies의 버전을 따라감
+dependencies { // 프로젝트에 필요한 의존성을 선언하는 곳 (따로 버전 설정 안하면 맨 위의 buildscript>dependencies의 버전을 따라감
     implementation('org.springframework.boot:spring-boot-starter-web') 
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    compile('org.projectlombok:lombok')
 }
