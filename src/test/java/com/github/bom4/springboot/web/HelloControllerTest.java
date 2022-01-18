@@ -35,10 +35,11 @@ public class HelloControllerTest {
         int amount=1000;
 
         mvc.perform(MockMvcRequestBuilders.get("/hello/dto")
-                .param("name",name)
+                .param("name",name) // api 요청에 사용될 파라미터 설정(string만 가능)
                 .param("amount",String.valueOf(amount)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name",is(name)))
+                .andExpect(jsonPath("$.name",is(name))) // jsonPath는 json 응답값을 필드별로 검증할 수 있음
+                .andExpect(jsonPath("$.aa",is("123")))
                 .andExpect((ResultMatcher) jsonPath("$.amount",is(amount)));
     }
 }
