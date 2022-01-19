@@ -35,5 +35,8 @@ dependencies { // 프로젝트에 필요한 의존성을 선언하는 곳 (따�
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('com.h2database:h2') // 인메모리 관계형 데이터베이스로 따로 설치 필요없음. 다만 메모리에서 실행되기 때문에 기본적으로 애플리케이션을 재시작할때마다 초기화됨
     compile('org.springframework.boot:spring-boot-starter-mustache')
+    compile('org.springframework.boot:spring-boot-starter-oauth2-client') // 소셜 기능 구현시 필요한 의존성
+    compile('org.springframework.session:spring-session-jdbc')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.security:spring-security-test')
 }

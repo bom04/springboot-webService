@@ -5,6 +5,7 @@ import com.github.bom4.springboot.domain.posts.PostsRepository;
 import com.github.bom4.springboot.web.dto.PostsSaveRequestDto;
 import com.github.bom4.springboot.web.dto.PostsUpdateRequestDto;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,26 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MockMvcBuilder;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PostsApiControllerTest {
+
+    @Autowired
+    private WebApplicationContext context;
+    private MockMvc mvc;
+
     @LocalServerPort
     private int port;
 
@@ -38,7 +50,16 @@ public class PostsApiControllerTest {
         postsRepository.deleteAll();
     }
 
+    @Before
+    public void setup() {
+        mvc= MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+    }
+
     @Test
+    @WithMockUser(roles="USER")
     public void Posts등록된다() throws Exception {
         //given
         String title="title";
@@ -63,6 +84,7 @@ public class PostsApiControllerTest {
     }
 
     @Test
+    @WithMockUser(roles="USER")
     public void Posts수정된다() throws Exception {
         //given
         Posts savedPosts=postsRepository.save(Posts.builder()

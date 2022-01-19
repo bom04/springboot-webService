@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.github.bom4.springboot.web.dto.HelloResponseDtoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-19T09:06:04" hostname="DESKTOP-PG3I4OF" time="0.004">
+  <properties/>
+  <testcase name="롬복기능테스트" classname="com.github.bom4.springboot.web.dto.HelloResponseDtoTest" time="0.004"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
