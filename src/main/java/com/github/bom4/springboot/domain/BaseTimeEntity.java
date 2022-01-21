@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class) // 이 클래스에 Auditing 기능을 포함시키겠다(엔티티를 감시해서 변화가 있을때마다 자동으로 값을 넣어주겠다)
 public abstract class BaseTimeEntity {
     @CreatedDate // 엔티티가 생성되어 저장될때 시간이 자동 저장됨
-    private LocalDateTime createDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate // 엔티티의 값을 변경할 때 시간이 자동 저장됨
     private LocalDateTime modifiedDate;
