@@ -8,15 +8,15 @@ files:
     destination: /home/ec2-user/app/step2/zip/ # source에서 지정된 파일을 받을 위치
     overwrite: yes # 기존에 같은 파일이 있으면 덮어쓸건지
 
-permissions: # codeDeploy에서 ec2로 넘겨줄 파일들이 모두 ec2-user 권한을 갖도록 설정함
-  - object: /
-    pattern: "**"
-    owner: ec2-user
-    group: ec2-user
-
-hooks: # codeDeploy의 배포 단계에서 실행할 명령어를 지정하는 명령어 (hooking: 감아간다=남의 물건을 훔치다=프로그램 중간에 메소드,명령 등을 바꾸거나 가로채는것)
-  ApplicationStart:
-    - location: deploy.sh
-      timeout: 60
-      runas: ec2-user
+#permissions: # codeDeploy에서 ec2로 넘겨줄 파일들이 모두 ec2-user 권한을 갖도록 설정함
+#  - object: /
+#    pattern: "**"
+#    owner: ec2-user
+#    group: ec2-user
+#
+#hooks: # codeDeploy의 배포 단계에서 실행할 명령어를 지정하는 명령어 (hooking: 감아간다=남의 물건을 훔치다=프로그램 중간에 메소드,명령 등을 바꾸거나 가로채는것)
+#  ApplicationStart:
+#    - location: deploy.sh
+#      timeout: 60
+#      runas: ec2-user
 
