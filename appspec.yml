@@ -1,0 +1,9 @@
+# AWS의 CodeDeploy를 설정하는 yml 파일
+
+
+version: 0.0 # codeDeploy의 버전 (프로젝트 버전이 아님)
+os: linux
+files:
+  - source:  / # codeDeploy에서 전달한 파일들 중 destination으로 이동시킬 대상을 지정 (/: 전체 파일)
+    destination: /home/ec2-user/app/step2/zip/ # source에서 지정된 파일을 받을 위치
+    overwrite: yes # 기존에 같은 파일이 있으면 덮어쓸건지

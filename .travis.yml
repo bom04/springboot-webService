@@ -1,3 +1,5 @@
+# Travis CI를 설정하는 yml 파일
+
 language: java
 jdk:
   - openjdk8
@@ -14,15 +16,6 @@ cache: # gradle을 통해 의존성을 받으면 이를 해당 디렉토리에 �
 
 script: "./gradlew clean build" # 브랜치에 푸쉬되었을때 수행하는 명령어
 
-# CI 실행 완료시 자동으로 알람이 가도록 설정
-notifications:
-  email:
-    recipients:
-      - gmaru6420@gmail.com
-
-before_install:
-  - chmod +x gradlew
-
 before_deploy: # deploy 명령어가 실행되기 전 수행됨
   - zip -r springboot-webService * # 현재 위치의 모든 파일(-r: 하위폴더 포함)을 본인의 프로젝트 이름으로 압축해야됨
   - mkdir -p deploy # travis ci가 실행중인 위치에 deploy라는 디렉토리 생성
@@ -38,3 +31,24 @@ deploy: # s3로 파일 업로드 혹은 codeDeploy로 배포 등 외부 서비�
     acl: private # acl:access control list, zip 파일 접근을 private으로
     local_dir: deploy # 배포할 파일들이 위치한 디렉토리 기술, before_deploy에서 배포하기 위해 zip 파일을 넣어놓은 디렉토리 지정
     wait-until-deployed: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: springboot-webservice-build1
+    key: springboot-webService.zip # 빌드 파일을 압축해서 전달
+    bundle_type: zip
+    application: springboot-webservice # aws 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
+    deployment_group: springboot-webservice-group # aws 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    region: ap-northeast-2
+    wait-until-deployed: true
+
+
+# CI 실행 완료시 자동으로 알람이 가도록 설정
+notifications:
+  email:
+    recipients:
+      - gmaru6420@gmail.com
+
+before_install:
+  - chmod +x gradlew
