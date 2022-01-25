@@ -22,7 +22,7 @@ apply plugin:'io.spring.dependency-management' // 스프링 부트의 의존성�
 //}
 
 group 'com.github.bom4'
-version '1.0.1-SNAPSHOT'
+version '1.0.1-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss") // build.gradle이 groovy 기반의 빌드툴이라 groovy의 new Date()이 사용가능
 
 repositories { // 각종 의존성(라이브러리)들을 어떤 '원격 저장소'에서 받을지 정함
     mavenCentral() // 개인이 만든 라이브러리를 mavenCentral에 업로드하기 어려움
